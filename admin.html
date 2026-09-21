@@ -436,6 +436,32 @@ botonEditar.type = "button";
 
 botonEditar.style.marginBottom = "10px";
 
+botonEditar.addEventListener("click", () => {
+
+  document.getElementById("nombre").value =
+    producto.nombre || "";
+
+  document.getElementById("categoria").value =
+    producto.categoria || "";
+
+  document.getElementById("descripcion").value =
+    producto.descripcion || "";
+
+  document.getElementById("precio").value =
+    producto.precio ?? "";
+
+  document.getElementById("stock").value =
+    producto.stock ?? 0;
+
+  document.getElementById("foto").value =
+    producto.foto || "";
+
+  document.getElementById("panelProductos").scrollIntoView({
+    behavior: "smooth"
+  });
+
+});
+    
 tarjeta.appendChild(botonEditar);
     
 const botonEliminar = document.createElement("button");
