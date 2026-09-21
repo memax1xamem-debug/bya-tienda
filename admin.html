@@ -151,16 +151,67 @@
 
 <body>
 
-  <header>
-    <div class="logo">ByA</div>
-    <span>Administración</span>
-  </header>
+<header>
+  <div class="logo">ByA</div>
 
+  <button
+    class="boton"
+    id="cerrarSesion"
+    style="display:none;"
+  >
+    Cerrar sesión
+  </button>
+</header>
   <main class="contenedor">
 
+
+<!-- INICIO DE SESIÓN DEL ADMINISTRADOR -->
+
+<section class="panel" id="panelLogin">
+
+  <h2>Acceso administrador</h2>
+
+  <form id="formLogin">
+
+    <label for="emailAdmin">
+      Correo electrónico
+    </label>
+
+    <input
+      type="email"
+      id="emailAdmin"
+      placeholder="Correo electrónico"
+      autocomplete="username"
+      required
+    >
+
+    <label for="passwordAdmin">
+      Contraseña
+    </label>
+
+    <input
+      type="password"
+      id="passwordAdmin"
+      placeholder="Contraseña"
+      autocomplete="current-password"
+      required
+    >
+
+    <button class="boton" type="submit">
+      Iniciar sesión
+    </button>
+
+    <p id="errorLogin"
+       style="color:#ff4fa3; margin-top:15px;">
+    </p>
+
+  </form>
+
+</section>
+    
     <h1>Panel de administración</h1>
 
-    <section class="panel">
+   <section class="panel" id="panelProductos" style="display:none;">
 
       <h2>Agregar producto</h2>
 
@@ -257,7 +308,8 @@
 
     </section>
 
-    <section class="panel">
+    
+<section class="panel" id="panelListaProductos" style="display:none;">
 
       <h2>Productos publicados</h2>
 
@@ -281,5 +333,151 @@
       });
   </script>
 
+
+<!-- FIREBASE - ACCESO ADMINISTRADOR -->
+
+<script type="module">
+
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from
+"https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+// Configuración de ByA
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDWluGdwdW6m-iHkt-VccB4FMm43LVKGh0",
+  authDomain: "bya-tienda.firebaseapp.com",
+  databaseURL: "https://bya-tienda-default-rtdb.firebaseio.com",
+  projectId: "bya-tienda",
+  storageBucket: "bya-tienda.firebasestorage.app",
+  messagingSenderId: "727262057950",
+  appId: "1:727262057950:web:92f7d76ea000ffd5be394f"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+// UID autorizado
+
+const ADMIN_UID = "vcReRhUphrfdKAfMZixKE3t7goo1";
+
+// Elementos de la página
+
+const panelLogin =
+  document.getElementById("panelLogin");
+
+const panelProductos =
+  document.getElementById("panelProductos");
+
+const panelListaProductos =
+  document.getElementById("panelListaProductos");
+
+const formLogin =
+  document.getElementById("formLogin");
+
+const errorLogin =
+  document.getElementById("errorLogin");
+
+  
+// Botón para cerrar sesión
+
+const cerrarSesion =
+  document.getElementById("cerrarSesion");
+
+cerrarSesion.addEventListener("click", async () => {
+
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+    alert("No se pudo cerrar la sesión.");
+  }
+
+});
+
+// Verificar sesión
+
+onAuthStateChanged(auth, async (usuario) => {
+
+  const autorizado =
+    usuario && usuario.uid === ADMIN_UID;
+
+  panelLogin.style.display =
+    autorizado ? "none" : "block";
+
+  panelProductos.style.display =
+    autorizado ? "block" : "none";
+
+  panelListaProductos.style.display =
+    autorizado ? "block" : "none";
+
+cerrarSesion.style.display =
+  autorizado ? "block" : "none";
+  
+  if (usuario && !autorizado) {
+    await signOut(auth);
+    errorLogin.textContent =
+      "Esta cuenta no tiene permiso de administrador.";
+  }
+
+});
+
+// Iniciar sesión
+
+formLogin.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  const email =
+    document.getElementById("emailAdmin").value;
+
+  const password =
+    document.getElementById("passwordAdmin").value;
+
+  errorLogin.textContent = "";
+
+  try {
+
+    const credencial =
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    if (credencial.user.uid !== ADMIN_UID) {
+
+      await signOut(auth);
+
+      errorLogin.textContent =
+        "No tenés permiso para administrar ByA.";
+
+    }
+
+  } catch (error) {
+
+    errorLogin.textContent =
+      "No se pudo iniciar sesión. Revisá tus datos.";
+
+    console.error(error.code);
+
+  } finally {
+
+    document.getElementById("passwordAdmin").value = "";
+
+  }
+
+});
+
+</script>
+  
 </body>
 </html>
