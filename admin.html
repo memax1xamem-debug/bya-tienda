@@ -428,7 +428,16 @@ onValue(productosRef, (snapshot) => {
       precio,
       stock
     );
+const botonEditar = document.createElement("button");
 
+botonEditar.textContent = "Editar producto";
+botonEditar.className = "boton";
+botonEditar.type = "button";
+
+botonEditar.style.marginBottom = "10px";
+
+tarjeta.appendChild(botonEditar);
+    
 const botonEliminar = document.createElement("button");
 
 botonEliminar.textContent = "Eliminar producto";
