@@ -449,6 +449,8 @@ botonEditar.addEventListener("click", () => {
 
 productoEnEdicion = productoSnapshot.ref;
 
+document.getElementById("cancelarEdicion").style.display = "inline-block";
+  
 document.querySelector(
   '#formProducto button[type="submit"]'
 ).textContent = "Guardar cambios";
@@ -604,6 +606,8 @@ if (productoEnEdicion) {
 
     formProducto.reset();
 
+document.getElementById("cancelarEdicion").style.display = "none";
+    
 document.querySelector(
   '#formProducto button[type="submit"]'
 ).textContent = "Guardar producto";
