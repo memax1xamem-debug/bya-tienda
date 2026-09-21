@@ -473,6 +473,8 @@ formProducto.addEventListener("submit", async (event) => {
   const stock =
     Number(document.getElementById("stock").value);
 
+  const foto =
+  document.getElementById("foto").value.trim();
   if (
     !nombre ||
     !categoria ||
@@ -496,15 +498,16 @@ formProducto.addEventListener("submit", async (event) => {
 
     const nuevoProducto = push(productosRef);
 
-    await set(nuevoProducto, {
-      nombre: nombre,
-      categoria: categoria,
-      descripcion: descripcion,
-      precio: precio,
-      stock: stock,
-      fecha: Date.now()
-    });
-
+   await set(nuevoProducto, {
+  nombre: nombre,
+  categoria: categoria,
+  descripcion: descripcion,
+  precio: precio,
+  stock: stock,
+  foto: foto,
+  fecha: Date.now()
+});
+    
     alert("Producto guardado correctamente.");
 
     formProducto.reset();
