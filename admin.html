@@ -285,16 +285,21 @@
           required
         >
 
-        <label for="foto">
-          Fotografía del producto
-        </label>
+<label for="foto">
+  Dirección de la fotografía
+</label>
 
-        <input
-          type="file"
-          id="foto"
-          accept="image/*"
-        >
+<input
+  type="url"
+  id="foto"
+  placeholder="https://..."
+>
 
+<p class="aviso">
+  Subí la fotografía a GitHub y pegá aquí
+  la dirección de la imagen.
+</p>
+        
         <button class="boton" type="submit">
           Guardar producto
         </button>
