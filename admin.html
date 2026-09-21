@@ -439,6 +439,10 @@ botonEditar.style.marginBottom = "10px";
 botonEditar.addEventListener("click", () => {
 
 productoEnEdicion = productoSnapshot.ref;
+
+document.querySelector(
+  '#formProducto button[type="submit"]'
+).textContent = "Guardar cambios";
   
   document.getElementById("nombre").value =
     producto.nombre || "";
@@ -591,6 +595,10 @@ if (productoEnEdicion) {
 
     formProducto.reset();
 
+document.querySelector(
+  '#formProducto button[type="submit"]'
+).textContent = "Guardar producto";
+    
   } catch (error) {
 
     console.error("Error al guardar:", error);
