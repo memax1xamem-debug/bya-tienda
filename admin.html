@@ -524,6 +524,23 @@ const formProducto =
   document.getElementById("formProducto");
 
 let productoEnEdicion = null;
+
+document.getElementById("cancelarEdicion")
+  .addEventListener("click", () => {
+
+    productoEnEdicion = null;
+
+    formProducto.reset();
+
+    document.querySelector(
+      '#formProducto button[type="submit"]'
+    ).textContent = "Guardar producto";
+
+    document.getElementById(
+      "cancelarEdicion"
+    ).style.display = "none";
+
+  });
   
 formProducto.addEventListener("submit", async (event) => {
 
