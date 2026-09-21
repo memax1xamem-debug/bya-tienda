@@ -429,6 +429,30 @@ onValue(productosRef, (snapshot) => {
       stock
     );
 
+const botonEliminar = document.createElement("button");
+
+botonEliminar.textContent = "Eliminar producto";
+botonEliminar.className = "boton";
+botonEliminar.type = "button";
+
+botonEliminar.addEventListener("click", async () => {
+  const confirmar = confirm(
+    "¿Seguro que querés eliminar este producto?"
+  );
+
+  if (!confirmar) return;
+
+  try {
+    await remove(productoSnapshot.ref);
+    alert("Producto eliminado correctamente.");
+  } catch (error) {
+    console.error("Error al eliminar:", error);
+    alert("No se pudo eliminar el producto.");
+  }
+});
+
+tarjeta.appendChild(botonEliminar);
+    
     listaProductos.appendChild(tarjeta);
 
   });
