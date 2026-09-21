@@ -438,6 +438,8 @@ botonEditar.style.marginBottom = "10px";
 
 botonEditar.addEventListener("click", () => {
 
+productoEnEdicion = productoSnapshot.ref;
+  
   document.getElementById("nombre").value =
     producto.nombre || "";
 
@@ -506,6 +508,8 @@ tarjeta.appendChild(botonEliminar);
 const formProducto =
   document.getElementById("formProducto");
 
+let productoEnEdicion = null;
+  
 formProducto.addEventListener("submit", async (event) => {
 
   event.preventDefault();
