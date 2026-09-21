@@ -372,6 +372,10 @@ const productosRef = ref(database, "productos");
 const listaProductos =
   document.getElementById("listaProductos");
 
+console.log("Base de datos:", database.app.options.databaseURL);
+
+console.log("Referencia de productos:", productosRef.toString());
+  
 onValue(productosRef, (snapshot) => {
 
   listaProductos.innerHTML = "";
