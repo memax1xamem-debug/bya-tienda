@@ -559,19 +559,35 @@ formProducto.addEventListener("submit", async (event) => {
 
   try {
 
-    const nuevoProducto = push(productosRef);
-
-   await set(nuevoProducto, {
+   const datosProducto = {
   nombre: nombre,
   categoria: categoria,
   descripcion: descripcion,
   precio: precio,
   stock: stock,
-  foto: foto,
-  fecha: Date.now()
-});
-    
-    alert("Producto guardado correctamente.");
+  foto: foto
+};
+
+if (productoEnEdicion) {
+
+  await update(productoEnEdicion, datosProducto);
+
+  productoEnEdicion = null;
+
+  alert("Producto actualizado correctamente.");
+
+} else {
+
+  const nuevoProducto = push(productosRef);
+
+  await set(nuevoProducto, {
+    ...datosProducto,
+    fecha: Date.now()
+  });
+
+  alert("Producto guardado correctamente.");
+
+}
 
     formProducto.reset();
 
