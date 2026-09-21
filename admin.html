@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ByA - Administración</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #141014;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #000;
+      padding: 20px;
+      border-bottom: 2px solid #ff4fa3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #ff4fa3;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .contenedor {
+      max-width: 1100px;
+      margin: auto;
+      padding: 25px 15px;
+    }
+
+    h1 {
+      color: #ff4fa3;
+      font-size: 25px;
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      color: #ff4fa3;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .panel {
+      background: #242024;
+      border: 1px solid #553044;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      background: #141014;
+      color: white;
+      border: 1px solid #553044;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: 1px solid #ff4fa3;
+    }
+
+    .boton {
+      background: #ff4fa3;
+      color: #000;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .boton:hover {
+      background: #ff80bd;
+    }
+
+    .productos {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .producto {
+      background: #141014;
+      border: 1px solid #553044;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .producto img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .precio {
+      color: #ff4fa3;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .aviso {
+      color: #aaa;
+      font-size: 13px;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px;
+      }
+
+      .panel {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">ByA</div>
+    <span>Administración</span>
+  </header>
+
+  <main class="contenedor">
+
+    <h1>Panel de administración</h1>
+
+    <section class="panel">
+
+      <h2>Agregar producto</h2>
+
+      <form id="formProducto">
+
+        <label for="nombre">
+          Nombre del producto
+        </label>
+
+        <input
+          type="text"
+          id="nombre"
+          placeholder="Nombre del producto"
+          required
+        >
+
+        <label for="categoria">
+          Categoría
+        </label>
+
+        <select id="categoria" required>
+          <option value="">
+            Seleccionar categoría
+          </option>
+          <option value="Bienestar íntimo">
+            Bienestar íntimo
+          </option>
+          <option value="Lubricantes">
+            Lubricantes
+          </option>
+          <option value="Accesorios">
+            Accesorios
+          </option>
+          <option value="Kits y regalos">
+            Kits y regalos
+          </option>
+        </select>
+
+        <label for="descripcion">
+          Descripción
+        </label>
+
+        <textarea
+          id="descripcion"
+          placeholder="Descripción del producto"
+        ></textarea>
+
+        <label for="precio">
+          Precio en pesos
+        </label>
+
+        <input
+          type="number"
+          id="precio"
+          min="0"
+          step="0.01"
+          placeholder="Precio"
+          required
+        >
+
+        <label for="stock">
+          Cantidad disponible
+        </label>
+
+        <input
+          type="number"
+          id="stock"
+          min="0"
+          step="1"
+          placeholder="Stock"
+          required
+        >
+
+        <label for="foto">
+          Fotografía del producto
+        </label>
+
+        <input
+          type="file"
+          id="foto"
+          accept="image/*"
+        >
+
+        <button class="boton" type="submit">
+          Guardar producto
+        </button>
+
+      </form>
+
+      <p class="aviso">
+        Próximamente conectaremos este formulario
+        con Firebase para guardar los productos.
+      </p>
+
+    </section>
+
+    <section class="panel">
+
+      <h2>Productos publicados</h2>
+
+      <div class="productos" id="listaProductos">
+        <p>Todavía no hay productos cargados.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    document.getElementById("formProducto")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        alert(
+          "El formulario está listo. " +
+          "En el próximo paso conectaremos Firebase."
+        );
+      });
+  </script>
+
+</body>
+</html>
