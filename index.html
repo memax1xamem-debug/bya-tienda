@@ -344,6 +344,12 @@ document.querySelectorAll(".categoria").forEach((categoria) => {
 
     console.log("Categoría seleccionada:", categoriaSeleccionada);
 
+// Actualizar los productos al cambiar de categoría
+
+if (productosGuardados) {
+  mostrarProductos(productosGuardados);
+}
+    
   });
 
 });
@@ -392,7 +398,9 @@ function agregarAlCarrito(id, producto) {
   
 // Mostrar productos en la tienda
 
-onValue(productosRef, (snapshot) => {
+function mostrarProductos(snapshot) {
+
+  // El contenido de la función continúa aquí
 
   listaProductos.innerHTML = "";
 
@@ -406,6 +414,15 @@ onValue(productosRef, (snapshot) => {
 
     const producto = productoSnapshot.val();
 
+// Filtrar productos por categoría
+
+if (
+  categoriaSeleccionada !== "todos" &&
+  producto.categoria !== categoriaSeleccionada
+) {
+  return;
+}
+    
     const tarjeta = document.createElement("div");
     tarjeta.className = "producto";
     
@@ -496,10 +513,19 @@ botonCarrito.addEventListener("click", () => {
 
     listaProductos.appendChild(tarjeta);
 
-  });
+    });
+
+}
+
+// Escuchar los cambios de Firebase
+
+onValue(productosRef, (snapshot) => {
+
+  productosGuardados = snapshot;
+
+  mostrarProductos(snapshot);
 
 }, (error) => {
-
   console.error("Error al cargar productos:", error);
 
   listaProductos.textContent =
