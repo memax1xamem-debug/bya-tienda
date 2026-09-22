@@ -407,6 +407,22 @@ onValue(productosRef, (snapshot) => {
     const tarjeta = document.createElement("div");
     tarjeta.className = "producto";
 
+// Mostrar fotografía del producto
+
+if (producto.foto) {
+
+  const imagen = document.createElement("img");
+
+  imagen.src = producto.foto;
+
+  imagen.alt = producto.nombre || "Producto";
+
+  imagen.loading = "lazy";
+
+  tarjeta.appendChild(imagen);
+
+}
+    
     const nombre = document.createElement("h3");
     nombre.textContent = producto.nombre || "Sin nombre";
 
