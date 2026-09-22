@@ -309,13 +309,34 @@ if (producto.foto) {
         ? "Disponible"
         : "Sin stock";
 
-    info.append(
-      nombre,
-      descripcion,
-      precio,
-      stock
-    );
+// Botón para agregar al carrito
 
+const botonCarrito = document.createElement("button");
+
+botonCarrito.className = "boton";
+
+botonCarrito.textContent = "🛒 Agregar al carrito";
+
+botonCarrito.style.marginTop = "15px";
+
+// Desactivar botón si no hay stock
+
+if (Number(producto.stock || 0) <= 0) {
+
+  botonCarrito.disabled = true;
+
+  botonCarrito.textContent = "Sin stock";
+
+}
+    
+    info.append(
+  nombre,
+  descripcion,
+  precio,
+  stock,
+  botonCarrito
+);
+  
     tarjeta.appendChild(info);
 
     listaProductos.appendChild(tarjeta);
