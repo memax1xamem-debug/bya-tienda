@@ -370,6 +370,17 @@ if (Number(producto.stock || 0) <= 0) {
   botonCarrito.textContent = "Sin stock";
 
 }
+
+// Agregar producto al carrito al hacer clic
+
+botonCarrito.addEventListener("click", () => {
+
+  agregarAlCarrito(
+    productoSnapshot.key,
+    producto
+  );
+
+});
     
     info.append(
   nombre,
