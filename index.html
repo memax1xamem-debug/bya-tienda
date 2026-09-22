@@ -446,17 +446,19 @@ if (
   return;
 }
 
-// Filtrar productos por nombre
+// Filtrar productos por nombre y descripción
+
+const textoProducto = (
+  String(producto.nombre || "") + " " +
+  String(producto.descripcion || "")
+).toLowerCase();
 
 if (
   textoBusqueda !== "" &&
-  !String(producto.nombre || "")
-    .toLowerCase()
-    .includes(textoBusqueda)
+  !textoProducto.includes(textoBusqueda)
 ) {
   return;
-}
-    
+}    
     const tarjeta = document.createElement("div");
     tarjeta.className = "producto";
     
