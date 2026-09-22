@@ -549,10 +549,18 @@ botonCarrito.addEventListener("click", () => {
 
     listaProductos.appendChild(tarjeta);
 
-    });
+  });
+
+  // Mostrar mensaje si no hay resultados
+
+  if (listaProductos.children.length === 0) {
+
+    listaProductos.textContent =
+      "No encontramos productos que coincidan con tu búsqueda.";
+
+  }
 
 }
-
 // Escuchar los cambios de Firebase
 
 onValue(productosRef, (snapshot) => {
