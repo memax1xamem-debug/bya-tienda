@@ -381,6 +381,20 @@ console.log("Buscando:", textoBusqueda);
 
 let carrito = [];
 
+// Eliminar un producto del carrito
+
+function eliminarDelCarrito(id) {
+
+  carrito = carrito.filter(
+    producto => producto.id !== id
+  );
+
+  // Actualizar el carrito
+
+  mostrarCarrito();
+
+}
+  
 // Mostrar los productos del carrito
 
 function mostrarCarrito() {
@@ -421,14 +435,40 @@ function mostrarCarrito() {
     item.style.padding = "12px";
     item.style.borderBottom = "1px solid #553044";
 
-    item.textContent =
-      producto.nombre +
-      " | Cantidad: " + producto.cantidad +
-      " | Subtotal: $" +
-      subtotal.toLocaleString("es-AR");
+item.textContent =
+  producto.nombre +
+  " | Cantidad: " + producto.cantidad +
+  " | Subtotal: $" +
+  subtotal.toLocaleString("es-AR");
 
-    listaCarrito.appendChild(item);
+// Crear botón para eliminar el producto
 
+const botonEliminar = document.createElement("button");
+
+botonEliminar.textContent = "Eliminar";
+
+botonEliminar.style.background = "#ff4fa3";
+botonEliminar.style.color = "#000";
+botonEliminar.style.border = "none";
+botonEliminar.style.borderRadius = "6px";
+botonEliminar.style.padding = "8px 12px";
+botonEliminar.style.marginLeft = "15px";
+botonEliminar.style.cursor = "pointer";
+
+// Eliminar el producto seleccionado
+
+botonEliminar.addEventListener("click", () => {
+
+  eliminarDelCarrito(producto.id);
+
+});
+
+// Agregar el botón al producto
+
+item.appendChild(botonEliminar);
+
+listaCarrito.appendChild(item);
+    
   });
 
   // Mostrar el total de la compra
