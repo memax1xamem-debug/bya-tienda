@@ -381,6 +381,66 @@ console.log("Buscando:", textoBusqueda);
 
 let carrito = [];
 
+// Mostrar los productos del carrito
+
+function mostrarCarrito() {
+
+  const listaCarrito =
+    document.getElementById("listaCarrito");
+
+  const totalCarrito =
+    document.getElementById("totalCarrito");
+
+  listaCarrito.innerHTML = "";
+
+  let total = 0;
+
+  // Comprobar si el carrito está vacío
+
+  if (carrito.length === 0) {
+
+    listaCarrito.textContent =
+      "Tu carrito está vacío.";
+
+    totalCarrito.textContent = "$0";
+
+    return;
+  }
+
+  // Mostrar cada producto agregado
+
+  carrito.forEach((producto) => {
+
+    const subtotal =
+      producto.precio * producto.cantidad;
+
+    total += subtotal;
+
+    const item = document.createElement("div");
+
+    item.style.padding = "12px";
+    item.style.borderBottom = "1px solid #553044";
+
+    item.textContent =
+      producto.nombre +
+      " | Cantidad: " + producto.cantidad +
+      " | Subtotal: $" +
+      subtotal.toLocaleString("es-AR");
+
+    listaCarrito.appendChild(item);
+
+  });
+
+  // Mostrar el total de la compra
+
+  totalCarrito.textContent =
+    total.toLocaleString("es-AR", {
+      style: "currency",
+      currency: "ARS"
+    });
+
+}
+  
 // Agregar productos al carrito
 
 function agregarAlCarrito(id, producto) {
@@ -417,6 +477,10 @@ function agregarAlCarrito(id, producto) {
 
   console.log("Carrito:", carrito);
 
+  // Actualizar el carrito automáticamente
+
+  mostrarCarrito();
+  
 }
   
 // Mostrar productos en la tienda
