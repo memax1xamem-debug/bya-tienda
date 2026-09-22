@@ -195,13 +195,15 @@
     </div>
   </header>
 
-  <div class="buscador">
-    <input
-      type="search"
-      placeholder="Buscar productos..."
-    >
-  </div>
-
+ <div class="buscador">
+  <input
+    type="search"
+    id="buscarProductos"
+    placeholder="🔍 Buscar productos..."
+    autocomplete="off"
+  >
+</div>
+  
   <section class="banner">
     <h1>Bienvenidos a ByA</h1>
     <p>
@@ -313,6 +315,10 @@ const listaProductos =
 
 let categoriaSeleccionada = "todos";
 
+// Texto ingresado en el buscador
+
+let textoBusqueda = "";
+  
 console.log(
   "Categorías encontradas:",
   document.querySelectorAll(".categoria").length
@@ -352,7 +358,22 @@ if (productosGuardados) {
     
   });
 
-});
+});// Buscar productos mientras el cliente escribe
+
+document.getElementById("buscarProductos")
+  .addEventListener("input", (event) => {
+
+    textoBusqueda = event.target.value
+      .toLowerCase()
+      .trim();
+
+    // Actualizar los productos
+
+    if (productosGuardados) {
+      mostrarProductos(productosGuardados);
+    }
+
+  });
   
 // Carrito de compras
 
@@ -419,6 +440,17 @@ function mostrarProductos(snapshot) {
 if (
   categoriaSeleccionada !== "todos" &&
   producto.categoria !== categoriaSeleccionada
+) {
+  return;
+}
+
+// Filtrar productos por nombre
+
+if (
+  textoBusqueda !== "" &&
+  !String(producto.nombre || "")
+    .toLowerCase()
+    .includes(textoBusqueda)
 ) {
   return;
 }
