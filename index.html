@@ -381,6 +381,51 @@ console.log("Buscando:", textoBusqueda);
 
 let carrito = [];
 
+// Aumentar o disminuir la cantidad de un producto
+
+function cambiarCantidad(id, cambio) {
+
+  const producto = carrito.find(
+    item => item.id === id
+  );
+
+  if (!producto) return;
+
+  // Calcular la nueva cantidad
+
+  const nuevaCantidad = producto.cantidad + cambio;
+
+  // Si llega a cero, eliminar el producto
+
+  if (nuevaCantidad <= 0) {
+
+    eliminarDelCarrito(id);
+    return;
+
+  }
+
+// Comprobar el stock disponible
+
+const stockDisponible = Number(producto.stock || 0);
+
+if (nuevaCantidad > stockDisponible) {
+
+  alert("No hay más unidades disponibles.");
+
+  return;
+
+}
+  
+  // Actualizar la cantidad
+
+  producto.cantidad = nuevaCantidad;
+
+  // Actualizar el carrito y el total
+
+  mostrarCarrito();
+
+}
+  
 // Eliminar un producto del carrito
 
 function eliminarDelCarrito(id) {
@@ -441,6 +486,48 @@ item.textContent =
   " | Subtotal: $" +
   subtotal.toLocaleString("es-AR");
 
+// Crear botones para modificar la cantidad
+
+const botonMenos = document.createElement("button");
+
+botonMenos.textContent = "−";
+
+botonMenos.style.padding = "8px 12px";
+botonMenos.style.margin = "8px";
+botonMenos.style.cursor = "pointer";
+
+// Disminuir cantidad
+
+botonMenos.addEventListener("click", () => {
+
+  cambiarCantidad(producto.id, -1);
+
+});
+
+// Botón para aumentar cantidad
+
+const botonMas = document.createElement("button");
+
+botonMas.textContent = "+";
+
+botonMas.style.padding = "8px 12px";
+botonMas.style.margin = "8px";
+botonMas.style.cursor = "pointer";
+
+// Aumentar cantidad
+
+botonMas.addEventListener("click", () => {
+
+  cambiarCantidad(producto.id, 1);
+
+});
+
+// Agregar los botones al producto
+
+item.appendChild(botonMenos);
+
+item.appendChild(botonMas);
+    
 // Crear botón para eliminar el producto
 
 const botonEliminar = document.createElement("button");
@@ -504,13 +591,14 @@ function agregarAlCarrito(id, producto) {
 
   } else {
 
-    carrito.push({
-      id: id,
-      nombre: producto.nombre,
-      precio: Number(producto.precio),
-      cantidad: 1
-    });
-
+   carrito.push({
+  id: id,
+  nombre: producto.nombre,
+  precio: Number(producto.precio),
+  cantidad: 1,
+  stock: Number(producto.stock || 0)
+});
+    
   }
 
   alert(producto.nombre + " agregado al carrito.");
