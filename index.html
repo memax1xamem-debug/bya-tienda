@@ -246,6 +246,48 @@ const productosRef = ref(database, "productos");
 const listaProductos =
   document.getElementById("listaProductos");
 
+// Carrito de compras
+
+let carrito = [];
+
+// Agregar productos al carrito
+
+function agregarAlCarrito(id, producto) {
+
+  const existente = carrito.find(
+    item => item.id === id
+  );
+
+  const cantidadActual = existente
+    ? existente.cantidad
+    : 0;
+
+  if (cantidadActual >= Number(producto.stock || 0)) {
+    alert("No hay más unidades disponibles.");
+    return;
+  }
+
+  if (existente) {
+
+    existente.cantidad++;
+
+  } else {
+
+    carrito.push({
+      id: id,
+      nombre: producto.nombre,
+      precio: Number(producto.precio),
+      cantidad: 1
+    });
+
+  }
+
+  alert(producto.nombre + " agregado al carrito.");
+
+  console.log("Carrito:", carrito);
+
+}
+  
 // Mostrar productos en la tienda
 
 onValue(productosRef, (snapshot) => {
