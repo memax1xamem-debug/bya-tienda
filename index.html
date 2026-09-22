@@ -90,14 +90,6 @@
       margin-bottom: 35px;
     }
 
-    .categoria {
-      background: #242024;
-      padding: 25px 10px;
-      text-align: center;
-      border-radius: 12px;
-      border: 1px solid #553044;
-    }
-
     .productos {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -190,12 +182,29 @@
     <h2>Nuestras categorías</h2>
 
     <div class="categorias">
-      <div class="categoria">Bienestar íntimo</div>
-      <div class="categoria">Lubricantes</div>
-      <div class="categoria">Accesorios</div>
-      <div class="categoria">Kits y regalos</div>
-    </div>
 
+  <div class="categoria" data-categoria="todos">
+    Todos los productos
+  </div>
+
+  <div class="categoria" data-categoria="Bienestar íntimo">
+    Bienestar íntimo
+  </div>
+
+  <div class="categoria" data-categoria="Lubricantes">
+    Lubricantes
+  </div>
+
+  <div class="categoria" data-categoria="Accesorios">
+    Accesorios
+  </div>
+
+  <div class="categoria" data-categoria="Kits y regalos">
+    Kits y regalos
+  </div>
+
+</div>
+    
     <h2>Productos destacados</h2>
 
     <div class="productos" id="listaProductos">
