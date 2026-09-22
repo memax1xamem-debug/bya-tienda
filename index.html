@@ -276,6 +276,40 @@ const productosRef = ref(database, "productos");
 const listaProductos =
   document.getElementById("listaProductos");
 
+// Categoría seleccionada
+
+let categoriaSeleccionada = "todos";
+
+// Guardar los productos para poder filtrarlos
+
+let productosGuardados = [];
+
+// Detectar cuando se selecciona una categoría
+
+document.querySelectorAll(".categoria").forEach((categoria) => {
+
+  categoria.addEventListener("click", () => {
+
+    // Quitar el resaltado de las demás categorías
+
+    document.querySelectorAll(".categoria").forEach((item) => {
+      item.classList.remove("activa");
+    });
+
+    // Resaltar la categoría seleccionada
+
+    categoria.classList.add("activa");
+
+    // Guardar la categoría elegida
+
+    categoriaSeleccionada = categoria.dataset.categoria;
+
+    console.log("Categoría seleccionada:", categoriaSeleccionada);
+
+  });
+
+});
+  
 // Carrito de compras
 
 let carrito = [];
