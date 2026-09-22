@@ -7,37 +7,6 @@
 
   <title>ByA - Tienda Online</title>
 
-/* ESTILO DE LAS CATEGORÍAS */
-
-.categorias {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-  margin-bottom: 35px;
-}
-
-.categoria {
-  background: #242024;
-  padding: 25px 10px;
-  text-align: center;
-  border-radius: 12px;
-  border: 1px solid #553044;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.categoria:hover {
-  background: #553044;
-  border-color: #ff4fa3;
-}
-
-.categoria.activa {
-  background: #ff4fa3;
-  color: #000;
-  border-color: #ff4fa3;
-  font-weight: bold;
-}
-  
   <style>
     * {
       box-sizing: border-box;
@@ -181,6 +150,39 @@
       color: #aaa;
       font-size: 13px;
     }
+
+/* ESTILO DE LAS CATEGORÍAS */
+
+.categorias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+.categoria {
+  background: #242024;
+  padding: 25px 10px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid #553044;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.categoria:hover {
+  background: #553044;
+  border-color: #ff4fa3;
+}
+
+.categoria.activa {
+  background: #ff4fa3;
+  color: #000;
+  border-color: #ff4fa3;
+  font-weight: bold;
+}
+
+    
   </style>
 </head>
 
