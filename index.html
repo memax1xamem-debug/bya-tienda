@@ -277,6 +277,20 @@
 .visor-siguiente {
   right: 10px;
 }
+
+/* CONTADOR DE FOTOGRAFÍAS */
+
+.contador-fotos {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
     
   </style>
 </head>
@@ -807,6 +821,9 @@ document.getElementById("visorAnterior").style.display =
 
 document.getElementById("visorSiguiente").style.display =
   fotos.length > 1 ? "block" : "none";
+
+document.getElementById("contadorFotos").textContent =
+  (visorFotoActual + 1) + " de " + visorFotosActuales.length;
   
 visor.classList.add("abierto");
 });
@@ -1055,6 +1072,9 @@ function cambiarFotoVisor(direccion) {
   document.getElementById("imagenAmpliada").src =
     visorFotosActuales[visorFotoActual];
 
+document.getElementById("contadorFotos").textContent =
+  (visorFotoActual + 1) + " de " + visorFotosActuales.length;
+  
 }
 
 visorAnterior.addEventListener("click", () => {
@@ -1116,6 +1136,8 @@ document.addEventListener("keydown", (event) => {
 
 <div id="visorFotos" class="visor-fotos">
 
+<div id="contadorFotos" class="contador-fotos"></div>
+  
   <button
     id="cerrarVisor"
     class="cerrar-visor"
