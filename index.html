@@ -968,11 +968,12 @@ botonSiguiente.addEventListener("click", () => {
 
     const stock = document.createElement("p");
 
-    stock.textContent =
-      Number(producto.stock || 0) > 0
-        ? "Disponible"
-        : "Sin stock";
+    const cantidadStock = Number(producto.stock || 0);
 
+stock.textContent = cantidadStock > 0
+  ? "Quedan " + cantidadStock + " unidades"
+  : "Sin stock";
+    
 // Botón para agregar al carrito
 
 const botonCarrito = document.createElement("button");
