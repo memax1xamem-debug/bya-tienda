@@ -841,7 +841,50 @@ formLogin.addEventListener("submit", async (event) => {
   }
 
 });
+  
+// VISTA PREVIA DE LAS FOTOGRAFÍAS
 
+const archivosFotos =
+  document.getElementById("archivosFotos");
+
+const vistaPreviaFotos =
+  document.getElementById("vistaPreviaFotos");
+
+archivosFotos.addEventListener("change", () => {
+
+  vistaPreviaFotos.innerHTML = "";
+
+  const archivos = Array.from(archivosFotos.files);
+
+  archivos.forEach((archivo) => {
+
+    if (!archivo.type.startsWith("image/")) {
+      return;
+    }
+
+    const imagen = document.createElement("img");
+
+    const urlTemporal = URL.createObjectURL(archivo);
+
+    imagen.src = urlTemporal;
+
+    imagen.style.width = "100px";
+    imagen.style.height = "100px";
+    imagen.style.objectFit = "cover";
+    imagen.style.borderRadius = "8px";
+    imagen.style.border = "1px solid #ff4fa3";
+
+    imagen.onload = () => {
+      URL.revokeObjectURL(urlTemporal);
+    };
+
+    vistaPreviaFotos.appendChild(imagen);
+
+  });
+
+});
+
+  
 </script>
   
 </body>
