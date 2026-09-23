@@ -593,7 +593,52 @@ listaFotosGuardadas.forEach((url) => {
   imagen.style.objectFit = "cover";
   imagen.style.borderRadius = "8px";
 
-  contenedorFotosGuardadas.appendChild(imagen);
+  const bloqueFoto = document.createElement("div");
+
+bloqueFoto.style.display = "flex";
+bloqueFoto.style.flexDirection = "column";
+bloqueFoto.style.alignItems = "center";
+bloqueFoto.style.gap = "5px";
+
+const botonQuitar = document.createElement("button");
+
+botonQuitar.type = "button";
+botonQuitar.textContent = "Quitar";
+botonQuitar.className = "boton";
+
+botonQuitar.addEventListener("click", () => {
+
+  const confirmar = confirm(
+    "¿Querés quitar esta fotografía del producto?"
+  );
+
+  if (!confirmar) return;
+
+  // Quitar la dirección de la foto principal, si corresponde
+  const campoFoto = document.getElementById("foto");
+
+  if (campoFoto.value.trim() === url) {
+    campoFoto.value = "";
+  }
+
+  // Quitar la dirección de las fotografías adicionales
+  const campoAdicionales =
+    document.getElementById("fotosAdicionales");
+
+  campoAdicionales.value = campoAdicionales.value
+    .split("\n")
+    .filter(enlace => enlace.trim() !== url)
+    .join("\n");
+
+  // Quitar la miniatura del formulario
+  bloqueFoto.remove();
+
+});
+
+bloqueFoto.appendChild(imagen);
+bloqueFoto.appendChild(botonQuitar);
+
+contenedorFotosGuardadas.appendChild(bloqueFoto);
 
 });
   
