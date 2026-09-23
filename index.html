@@ -1065,6 +1065,30 @@ visorSiguiente.addEventListener("click", () => {
   cambiarFotoVisor(1);
 });
 
+// CAMBIAR FOTOS DESLIZANDO EL DEDO
+
+let inicioDeslizamiento = 0;
+
+visorFotos.addEventListener("touchstart", (event) => {
+  inicioDeslizamiento = event.changedTouches[0].screenX;
+}, { passive: true });
+
+visorFotos.addEventListener("touchend", (event) => {
+  if (!visorFotos.classList.contains("abierto")) return;
+
+  const finDeslizamiento = event.changedTouches[0].screenX;
+  const distancia = finDeslizamiento - inicioDeslizamiento;
+
+  // Ignorar movimientos muy cortos
+  if (Math.abs(distancia) < 50) return;
+
+  if (distancia < 0) {
+    cambiarFotoVisor(1);
+  } else {
+    cambiarFotoVisor(-1);
+  }
+}, { passive: true });
+  
 // CONTROLAR EL VISOR CON EL TECLADO
 
 document.addEventListener("keydown", (event) => {
