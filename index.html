@@ -980,6 +980,21 @@ document.getElementById("finalizarCompra")
     window.open(url, "_blank");
 
   });
+
+// CERRAR EL VISOR DE FOTOGRAFÍAS
+
+const visorFotos = document.getElementById("visorFotos");
+const cerrarVisor = document.getElementById("cerrarVisor");
+
+cerrarVisor.addEventListener("click", () => {
+  visorFotos.classList.remove("abierto");
+});
+
+visorFotos.addEventListener("click", (event) => {
+  if (event.target === visorFotos) {
+    visorFotos.classList.remove("abierto");
+  }
+});
   
 </script>
 
