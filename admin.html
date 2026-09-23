@@ -310,6 +310,16 @@
          gap:10px;
          margin-bottom:20px;">
 </div>
+
+<label>Fotografías guardadas del producto</label>
+
+<div
+  id="fotosGuardadas"
+  style="display:flex;
+         flex-wrap:wrap;
+         gap:10px;
+         margin-bottom:20px;">
+</div>
         
 <label for="foto">
   Dirección de la fotografía
@@ -558,6 +568,35 @@ document.querySelector(
   document.getElementById("foto").value =
     producto.foto || "";
 
+// Mostrar las fotografías guardadas del producto
+
+const contenedorFotosGuardadas =
+  document.getElementById("fotosGuardadas");
+
+contenedorFotosGuardadas.innerHTML = "";
+
+const listaFotosGuardadas = Array.isArray(producto.fotos)
+  ? producto.fotos
+  : producto.foto
+    ? [producto.foto]
+    : [];
+
+listaFotosGuardadas.forEach((url) => {
+
+  const imagen = document.createElement("img");
+
+  imagen.src = url;
+  imagen.alt = "Fotografía del producto";
+
+  imagen.style.width = "100px";
+  imagen.style.height = "100px";
+  imagen.style.objectFit = "cover";
+  imagen.style.borderRadius = "8px";
+
+  contenedorFotosGuardadas.appendChild(imagen);
+
+});
+  
 // Mostrar fotografías adicionales al editar
 
 document.getElementById("fotosAdicionales").value =
