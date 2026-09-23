@@ -127,6 +127,10 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.miniaturas img.activa {
+  border: 3px solid #ff4fa3;
+}
     
 /* GALERÍA DE FOTOGRAFÍAS */
 
@@ -862,11 +866,20 @@ if (fotos.length > 1) {
     miniatura.alt = "Foto " + (indice + 1);
     miniatura.loading = "lazy";
 
-    miniatura.addEventListener("click", () => {
-      fotoActual = indice;
-      imagen.src = fotos[fotoActual];
-    });
+   miniatura.addEventListener("click", () => {
+  fotoActual = indice;
+  imagen.src = fotos[fotoActual];
 
+  miniaturas.querySelectorAll("img").forEach((img) => {
+    img.classList.remove("activa");
+  });
+
+  miniatura.classList.add("activa");
+});
+
+if (indice === 0) {
+  miniatura.classList.add("activa");
+}
     miniaturas.appendChild(miniatura);
 
   });
