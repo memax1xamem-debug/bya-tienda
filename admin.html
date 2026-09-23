@@ -424,6 +424,32 @@ const database = getDatabase(app);
 
 const productosRef = ref(database, "productos");
 
+// SUBIR UNA FOTOGRAFÍA A CLOUDINARY
+
+async function subirFotoCloudinary(archivo) {
+
+  const datos = new FormData();
+
+  datos.append("file", archivo);
+  datos.append("upload_preset", "bya_productos");
+
+  const respuesta = await fetch(
+    "https://api.cloudinary.com/v1_1/qqmjx1vh/image/upload",
+    {
+      method: "POST",
+      body: datos
+    }
+  );
+
+  if (!respuesta.ok) {
+    throw new Error("No se pudo subir la fotografía.");
+  }
+
+  const resultado = await respuesta.json();
+
+  return resultado.secure_url;
+}
+  
 // Mostrar productos guardados en Firebase
 
 const listaProductos =
@@ -650,11 +676,18 @@ const fotosAdicionales = document
 
 // Crear la lista completa de fotografías
 
+// Preparar la lista de fotografías
+
 const fotos = [
   foto,
   ...fotosAdicionales
 ].filter(url => url !== "");
-  
+
+// Obtener las fotografías seleccionadas desde la PC
+
+const fotosSeleccionadas = Array.from(
+  document.getElementById("archivosFotos").files
+);  
   if (
     !nombre ||
     !categoria ||
@@ -676,13 +709,30 @@ const fotos = [
 
   try {
 
+// Subir a Cloudinary las fotografías seleccionadas desde la PC
+
+for (const archivo of fotosSeleccionadas) {
+
+  if (!archivo.type.startsWith("image/")) {
+    throw new Error("El archivo seleccionado no es una imagen.");
+  }
+
+  const enlaceFoto = await subirFotoCloudinary(archivo);
+
+  fotos.push(enlaceFoto);
+
+}
+
+// Usar la primera fotografía como imagen principal
+const fotoPrincipal = fotos[0] || "";
+    
  const datosProducto = {
   nombre: nombre,
   categoria: categoria,
   descripcion: descripcion,
   precio: precio,
   stock: stock,
-  foto: foto,
+  foto: fotoPrincipal,
   fotos: fotos
 };
 
