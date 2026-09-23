@@ -854,9 +854,11 @@ visor.classList.add("abierto");
 
 // MINIATURAS DE LAS FOTOGRAFÍAS
 
+  let miniaturas;
+  
 if (fotos.length > 1) {
 
-  const miniaturas = document.createElement("div");
+  miniaturas = document.createElement("div");
   miniaturas.className = "miniaturas";
 
   fotos.forEach((foto, indice) => {
@@ -916,7 +918,11 @@ if (indice === 0) {
         (fotoActual - 1 + fotos.length) % fotos.length;
 
       imagen.src = fotos[fotoActual];
-
+      
+miniaturas.querySelectorAll("img").forEach((img, indice) => {
+  img.classList.toggle("activa", indice === fotoActual);
+});
+      
     });
 
     // Fotografía siguiente
