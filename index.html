@@ -110,6 +110,44 @@
       background: white;
     }
 
+/* GALERÍA DE FOTOGRAFÍAS */
+
+.galeria {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: white;
+}
+
+.galeria img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.galeria-boton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.galeria-anterior {
+  left: 5px;
+}
+
+.galeria-siguiente {
+  right: 5px;
+}
+    
     .producto-info {
       padding: 15px;
     }
@@ -664,24 +702,80 @@ if (
     const tarjeta = document.createElement("div");
     tarjeta.className = "producto";
     
-// Mostrar fotografía del producto
+// GALERÍA DE FOTOGRAFÍAS DEL PRODUCTO
 
-const imagen = document.createElement("img");
+const fotos = Array.isArray(producto.fotos)
+  ? producto.fotos.filter(url => url)
+  : [];
 
-if (producto.foto) {
+if (fotos.length === 0 && producto.foto) {
+  fotos.push(producto.foto);
+}
 
-  imagen.src = producto.foto;
+if (fotos.length > 0) {
+
+  let fotoActual = 0;
+
+  const galeria = document.createElement("div");
+  galeria.className = "galeria";
+
+  const imagen = document.createElement("img");
+
+  imagen.src = fotos[fotoActual];
   imagen.alt = producto.nombre || "Producto ByA";
   imagen.loading = "lazy";
 
-  imagen.onerror = function() {
-    imagen.style.display = "none";
-  };
+  galeria.appendChild(imagen);
 
-  tarjeta.appendChild(imagen);
+  // Mostrar botones si hay más de una fotografía
+
+  if (fotos.length > 1) {
+
+    const botonAnterior = document.createElement("button");
+
+    botonAnterior.className =
+      "galeria-boton galeria-anterior";
+
+    botonAnterior.textContent = "❮";
+    botonAnterior.type = "button";
+
+    const botonSiguiente = document.createElement("button");
+
+    botonSiguiente.className =
+      "galeria-boton galeria-siguiente";
+
+    botonSiguiente.textContent = "❯";
+    botonSiguiente.type = "button";
+
+    // Fotografía anterior
+
+    botonAnterior.addEventListener("click", () => {
+
+      fotoActual =
+        (fotoActual - 1 + fotos.length) % fotos.length;
+
+      imagen.src = fotos[fotoActual];
+
+    });
+
+    // Fotografía siguiente
+
+    botonSiguiente.addEventListener("click", () => {
+
+      fotoActual = (fotoActual + 1) % fotos.length;
+
+      imagen.src = fotos[fotoActual];
+
+    });
+
+    galeria.appendChild(botonAnterior);
+    galeria.appendChild(botonSiguiente);
+
+  }
+
+  tarjeta.appendChild(galeria);
 
 }
-
     const info = document.createElement("div");
     info.className = "producto-info";
 
