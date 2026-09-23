@@ -326,6 +326,13 @@
     </div>
   </header>
 
+<div style="text-align:center; padding:15px; background:#000;">
+  <a href="#seccionCarrito"
+     style="display:inline-block; padding:12px 25px; background:#ff4fa3; color:#000; text-decoration:none; border-radius:8px; font-weight:bold;">
+    🛒 Ver carrito
+  </a>
+</div>
+  
  <div class="buscador">
   <input
     type="search"
@@ -766,7 +773,20 @@ function mostrarProductos(snapshot) {
     return;
   }
 
-  snapshot.forEach((productoSnapshot) => {
+  const productosOrdenados = [];
+
+snapshot.forEach((productoSnapshot) => {
+  productosOrdenados.push(productoSnapshot);
+});
+
+productosOrdenados.sort((a, b) => {
+  const stockA = Number(a.val().stock || 0);
+  const stockB = Number(b.val().stock || 0);
+
+  return Number(stockB > 0) - Number(stockA > 0);
+});
+
+productosOrdenados.forEach((productoSnapshot) => {
 
     const producto = productoSnapshot.val();
 
@@ -970,9 +990,11 @@ botonSiguiente.addEventListener("click", () => {
 
     const cantidadStock = Number(producto.stock || 0);
 
-stock.textContent = cantidadStock > 0
-  ? "Quedan " + cantidadStock + " unidades"
-  : "Sin stock";
+stock.textContent = cantidadStock === 1
+  ? "¡Última unidad disponible!"
+  : cantidadStock > 1
+    ? "Quedan " + cantidadStock + " unidades"
+    : "Sin stock";
     
 // Botón para agregar al carrito
 
