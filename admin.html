@@ -678,6 +678,57 @@ botonPrincipal.addEventListener("click", () => {
 });
 
 bloqueFoto.appendChild(botonPrincipal);
+
+const botonSubir = document.createElement("button");
+botonSubir.type = "button";
+botonSubir.textContent = "↑ Subir";
+botonSubir.className = "boton";
+
+const botonBajar = document.createElement("button");
+botonBajar.type = "button";
+botonBajar.textContent = "↓ Bajar";
+botonBajar.className = "boton";
+
+function moverFoto(direccion) {
+
+  const campoFoto = document.getElementById("foto");
+  const campoAdicionales =
+    document.getElementById("fotosAdicionales");
+
+  const fotosOrdenadas = [
+    campoFoto.value.trim(),
+    ...campoAdicionales.value
+      .split("\n")
+      .map(enlace => enlace.trim())
+  ].filter(enlace => enlace !== "");
+
+  const posicion = fotosOrdenadas.indexOf(url);
+  const nuevaPosicion = posicion + direccion;
+
+  if (
+    posicion === -1 ||
+    nuevaPosicion < 0 ||
+    nuevaPosicion >= fotosOrdenadas.length
+  ) {
+    return;
+  }
+
+  [fotosOrdenadas[posicion], fotosOrdenadas[nuevaPosicion]] =
+    [fotosOrdenadas[nuevaPosicion], fotosOrdenadas[posicion]];
+
+  campoFoto.value = fotosOrdenadas[0];
+  campoAdicionales.value = fotosOrdenadas.slice(1).join("\n");
+
+  alert(
+    "Orden actualizado. Presioná Guardar cambios para confirmarlo."
+  );
+}
+
+botonSubir.addEventListener("click", () => moverFoto(-1));
+botonBajar.addEventListener("click", () => moverFoto(1));
+
+bloqueFoto.appendChild(botonSubir);
+bloqueFoto.appendChild(botonBajar);
   
 bloqueFoto.appendChild(imagen);
 bloqueFoto.appendChild(botonQuitar);
