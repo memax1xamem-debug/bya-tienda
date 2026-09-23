@@ -295,6 +295,23 @@
   placeholder="https://..."
 >
 
+<!-- FOTOGRAFÍAS ADICIONALES -->
+
+<label for="fotosAdicionales">
+  Fotografías adicionales del producto
+</label>
+
+<textarea
+  id="fotosAdicionales"
+  placeholder="Pegá aquí los enlaces de las fotografías, uno por línea"
+  rows="4"
+></textarea>
+
+<p class="aviso">
+  Podés agregar varias fotografías.
+  Pegá la dirección de cada imagen en una línea diferente.
+</p>
+        
 <p class="aviso">
   Subí la fotografía a GitHub y pegá aquí
   la dirección de la imagen.
@@ -489,6 +506,15 @@ document.querySelector(
   document.getElementById("foto").value =
     producto.foto || "";
 
+// Mostrar fotografías adicionales al editar
+
+document.getElementById("fotosAdicionales").value =
+  Array.isArray(producto.fotos)
+    ? producto.fotos
+        .filter(url => url !== producto.foto)
+        .join("\n")
+    : "";
+  
   document.getElementById("panelProductos").scrollIntoView({
     behavior: "smooth"
   });
@@ -586,6 +612,23 @@ formProducto.addEventListener("submit", async (event) => {
 
   const foto =
   document.getElementById("foto").value.trim();
+
+  // Obtener las fotografías adicionales
+
+const fotosAdicionales = document
+  .getElementById("fotosAdicionales")
+  .value
+  .split("\n")
+  .map(url => url.trim())
+  .filter(url => url !== "");
+
+// Crear la lista completa de fotografías
+
+const fotos = [
+  foto,
+  ...fotosAdicionales
+].filter(url => url !== "");
+  
   if (
     !nombre ||
     !categoria ||
@@ -607,13 +650,14 @@ formProducto.addEventListener("submit", async (event) => {
 
   try {
 
-   const datosProducto = {
+ const datosProducto = {
   nombre: nombre,
   categoria: categoria,
   descripcion: descripcion,
   precio: precio,
   stock: stock,
-  foto: foto
+  foto: foto,
+  fotos: fotos
 };
 
 if (productoEnEdicion) {
