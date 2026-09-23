@@ -779,6 +779,64 @@ onValue(productosRef, (snapshot) => {
 
 });
 
+// FINALIZAR COMPRA POR WHATSAPP
+
+document.getElementById("finalizarCompra")
+  .addEventListener("click", () => {
+
+    // Comprobar que el carrito tenga productos
+
+    if (carrito.length === 0) {
+      alert("Tu carrito está vacío.");
+      return;
+    }
+
+    // Número de WhatsApp de ByA
+
+    const telefono = "5491136592270";
+
+    // Crear el mensaje del pedido
+
+    let mensaje = "Hola, quiero realizar un pedido en ByA.\n\n";
+
+    mensaje += "🛒 MI PEDIDO:\n\n";
+
+    let total = 0;
+
+    carrito.forEach((producto) => {
+
+      const subtotal =
+        producto.precio * producto.cantidad;
+
+      total += subtotal;
+
+      mensaje +=
+        "• " + producto.nombre + "\n" +
+        "Cantidad: " + producto.cantidad + "\n" +
+        "Subtotal: $" +
+        subtotal.toLocaleString("es-AR") +
+        "\n\n";
+
+    });
+
+    mensaje +=
+      "💰 TOTAL: $" +
+      total.toLocaleString("es-AR");
+
+    mensaje += "\n\nQuisiera coordinar el pago y la entrega.";
+
+    // Abrir WhatsApp con el pedido
+
+    const url =
+      "https://wa.me/" +
+      telefono +
+      "?text=" +
+      encodeURIComponent(mensaje);
+
+    window.open(url, "_blank");
+
+  });
+  
 </script>
   
 </body>
