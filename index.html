@@ -853,7 +853,8 @@ if (fotos.length > 1) {
 
   });
 
-  galeria.insertAdjacentElement("afterend", miniaturas);
+  tarjeta.appendChild(galeria);
+tarjeta.appendChild(miniaturas);
 
 }
   
@@ -900,11 +901,6 @@ if (fotos.length > 1) {
 
     galeria.appendChild(botonAnterior);
     galeria.appendChild(botonSiguiente);
-
-  }
-
-  tarjeta.appendChild(galeria);
-tarjeta.appendChild(miniaturas);
 
 }
     const info = document.createElement("div");
