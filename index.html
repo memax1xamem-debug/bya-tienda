@@ -853,7 +853,7 @@ if (fotos.length > 1) {
 
   });
 
-  tarjeta.prepend(galeria);
+  tarjeta.appendChild(miniaturas);
 
 }
   
@@ -902,7 +902,12 @@ if (fotos.length > 1) {
     galeria.appendChild(botonSiguiente);
 
 }
-    const info = document.createElement("div");
+
+  tarjeta.prepend(galeria);
+
+}
+  
+  const info = document.createElement("div");
     info.className = "producto-info";
 
     const nombre = document.createElement("h3");
