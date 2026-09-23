@@ -801,6 +801,13 @@ imagenAmpliada.alt = imagen.alt;
 visorFotosActuales = fotos;
 visorFotoActual = fotoActual;
 
+// Mostrar las flechas solo si hay más de una foto
+document.getElementById("visorAnterior").style.display =
+  fotos.length > 1 ? "block" : "none";
+
+document.getElementById("visorSiguiente").style.display =
+  fotos.length > 1 ? "block" : "none";
+  
 visor.classList.add("abierto");
 });
   
@@ -1056,6 +1063,27 @@ visorAnterior.addEventListener("click", () => {
 
 visorSiguiente.addEventListener("click", () => {
   cambiarFotoVisor(1);
+});
+
+// CONTROLAR EL VISOR CON EL TECLADO
+
+document.addEventListener("keydown", (event) => {
+
+  // No hacer nada si el visor está cerrado
+  if (!visorFotos.classList.contains("abierto")) return;
+
+  if (event.key === "ArrowLeft") {
+    cambiarFotoVisor(-1);
+  }
+
+  if (event.key === "ArrowRight") {
+    cambiarFotoVisor(1);
+  }
+
+  if (event.key === "Escape") {
+    visorFotos.classList.remove("abierto");
+  }
+
 });
   
 </script>
