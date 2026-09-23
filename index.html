@@ -773,6 +773,8 @@ if (fotos.length > 0) {
 
   let fotoActual = 0;
 
+// Guardar qué galería está abierta en el visor
+  
   const galeria = document.createElement("div");
   galeria.className = "galeria";
 
@@ -792,11 +794,14 @@ imagen.addEventListener("click", () => {
   const imagenAmpliada =
     document.getElementById("imagenAmpliada");
 
-  imagenAmpliada.src = imagen.src;
-  imagenAmpliada.alt = imagen.alt;
+ imagenAmpliada.src = imagen.src;
+imagenAmpliada.alt = imagen.alt;
 
-  visor.classList.add("abierto");
+// Guardar las fotos y la posición actual para el visor
+visorFotosActuales = fotos;
+visorFotoActual = fotoActual;
 
+visor.classList.add("abierto");
 });
   
   galeria.appendChild(imagen);
@@ -1007,6 +1012,10 @@ document.getElementById("finalizarCompra")
 
 // CERRAR EL VISOR DE FOTOGRAFÍAS
 
+// Fotografías y posición de la galería ampliada
+let visorFotosActuales = [];
+let visorFotoActual = 0;
+  
 const visorFotos = document.getElementById("visorFotos");
 const cerrarVisor = document.getElementById("cerrarVisor");
 
@@ -1018,6 +1027,35 @@ visorFotos.addEventListener("click", (event) => {
   if (event.target === visorFotos) {
     visorFotos.classList.remove("abierto");
   }
+});
+
+// CAMBIAR FOTOGRAFÍAS EN EL VISOR AMPLIADO
+
+const visorAnterior =
+  document.getElementById("visorAnterior");
+
+const visorSiguiente =
+  document.getElementById("visorSiguiente");
+
+function cambiarFotoVisor(direccion) {
+
+  if (visorFotosActuales.length === 0) return;
+
+  visorFotoActual =
+    (visorFotoActual + direccion + visorFotosActuales.length)
+    % visorFotosActuales.length;
+
+  document.getElementById("imagenAmpliada").src =
+    visorFotosActuales[visorFotoActual];
+
+}
+
+visorAnterior.addEventListener("click", () => {
+  cambiarFotoVisor(-1);
+});
+
+visorSiguiente.addEventListener("click", () => {
+  cambiarFotoVisor(1);
 });
   
 </script>
