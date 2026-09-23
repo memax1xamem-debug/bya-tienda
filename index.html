@@ -253,6 +253,30 @@
   font-size: 38px;
   cursor: pointer;
 }
+
+/* FLECHAS DEL VISOR AMPLIADO */
+
+.visor-boton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.visor-anterior {
+  left: 10px;
+}
+
+.visor-siguiente {
+  right: 10px;
+}
     
   </style>
 </head>
@@ -1011,7 +1035,21 @@ visorFotos.addEventListener("click", (event) => {
   <img
     id="imagenAmpliada"
     alt="Fotografía ampliada del producto"
-  >
+  
+    <button
+  id="visorAnterior"
+  class="visor-boton visor-anterior"
+  type="button"
+  aria-label="Fotografía anterior"
+>❮</button>
+
+<button
+  id="visorSiguiente"
+  class="visor-boton visor-siguiente"
+  type="button"
+  aria-label="Fotografía siguiente"
+>❯</button>
+    >
 </div>
   
 </body>
