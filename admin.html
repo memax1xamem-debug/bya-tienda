@@ -635,6 +635,50 @@ botonQuitar.addEventListener("click", () => {
 
 });
 
+const botonPrincipal = document.createElement("button");
+
+botonPrincipal.type = "button";
+botonPrincipal.textContent = "Elegir como principal";
+botonPrincipal.className = "boton";
+
+botonPrincipal.addEventListener("click", () => {
+
+  const campoFoto = document.getElementById("foto");
+
+  const campoAdicionales =
+    document.getElementById("fotosAdicionales");
+
+  const fotoPrincipalAnterior = campoFoto.value.trim();
+
+  const adicionales = campoAdicionales.value
+    .split("\n")
+    .map(enlace => enlace.trim())
+    .filter(enlace => enlace !== "");
+
+  // Reunir todas las fotografías sin repetirlas
+  const todasLasFotos = [
+    fotoPrincipalAnterior,
+    ...adicionales
+  ].filter(enlace => enlace !== "");
+
+  const fotosSinRepetir = [...new Set(todasLasFotos)];
+
+  // Colocar la fotografía elegida como principal
+  campoFoto.value = url;
+
+  // Dejar las demás como fotografías adicionales
+  campoAdicionales.value = fotosSinRepetir
+    .filter(enlace => enlace !== url)
+    .join("\n");
+
+  alert(
+    "Fotografía principal seleccionada. Presioná Guardar cambios para confirmar."
+  );
+
+});
+
+bloqueFoto.appendChild(botonPrincipal);
+  
 bloqueFoto.appendChild(imagen);
 bloqueFoto.appendChild(botonQuitar);
 
