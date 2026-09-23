@@ -925,19 +925,19 @@ miniaturas.querySelectorAll("img").forEach((img, indice) => {
       
     });
 
-    // Fotografía siguiente
+   // Fotografía siguiente
 
-    botonSiguiente.addEventListener("click", () => {
+botonSiguiente.addEventListener("click", () => {
 
-      fotoActual = (fotoActual + 1) % fotos.length;
+  fotoActual = (fotoActual + 1) % fotos.length;
 
-      imagen.src = fotos[fotoActual];
+  imagen.src = fotos[fotoActual];
 
-miniaturas.querySelectorAll("img").forEach((img, indice) => {
-  img.classList.toggle("activa", indice === fotoActual);
+  miniaturas.querySelectorAll("img").forEach((img, indice) => {
+    img.classList.toggle("activa", indice === fotoActual);
+  });
 
-});
-      
+});   
     });
 
     galeria.appendChild(botonAnterior);
