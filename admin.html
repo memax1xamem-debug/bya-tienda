@@ -719,6 +719,31 @@ function moverFoto(direccion) {
   campoFoto.value = fotosOrdenadas[0];
   campoAdicionales.value = fotosOrdenadas.slice(1).join("\n");
 
+// Actualizar también el orden visual de las miniaturas
+
+const bloques = Array.from(
+  contenedorFotosGuardadas.children
+);
+
+const bloqueActual = bloques[posicion];
+const bloqueDestino = bloques[nuevaPosicion];
+
+if (bloqueActual && bloqueDestino) {
+
+  if (direccion === -1) {
+    contenedorFotosGuardadas.insertBefore(
+      bloqueActual,
+      bloqueDestino
+    );
+  } else {
+    contenedorFotosGuardadas.insertBefore(
+      bloqueDestino,
+      bloqueActual
+    );
+  }
+
+}
+  
   alert(
     "Orden actualizado. Presioná Guardar cambios para confirmarlo."
   );
