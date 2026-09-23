@@ -933,6 +933,10 @@ miniaturas.querySelectorAll("img").forEach((img, indice) => {
 
       imagen.src = fotos[fotoActual];
 
+miniaturas.querySelectorAll("img").forEach((img, indice) => {
+  img.classList.toggle("activa", indice === fotoActual);
+});
+      
     });
 
     galeria.appendChild(botonAnterior);
