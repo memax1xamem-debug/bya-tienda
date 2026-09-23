@@ -220,6 +220,39 @@
   font-weight: bold;
 }
 
+    /* VISOR DE FOTOGRAFÍAS */
+
+.visor-fotos {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.92);
+  align-items: center;
+  justify-content: center;
+  padding: 50px 15px;
+}
+
+.visor-fotos.abierto {
+  display: flex;
+}
+
+.visor-fotos img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.cerrar-visor {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 38px;
+  cursor: pointer;
+}
     
   </style>
 </head>
@@ -725,6 +758,23 @@ if (fotos.length > 0) {
   imagen.alt = producto.nombre || "Producto ByA";
   imagen.loading = "lazy";
 
+// Abrir la fotografía actual en tamaño ampliado
+
+imagen.style.cursor = "zoom-in";
+
+imagen.addEventListener("click", () => {
+
+  const visor = document.getElementById("visorFotos");
+  const imagenAmpliada =
+    document.getElementById("imagenAmpliada");
+
+  imagenAmpliada.src = imagen.src;
+  imagenAmpliada.alt = imagen.alt;
+
+  visor.classList.add("abierto");
+
+});
+  
   galeria.appendChild(imagen);
 
   // Mostrar botones si hay más de una fotografía
@@ -932,6 +982,22 @@ document.getElementById("finalizarCompra")
   });
   
 </script>
+
+<!-- VENTANA PARA AMPLIAR FOTOGRAFÍAS -->
+
+<div id="visorFotos" class="visor-fotos">
+  <button
+    id="cerrarVisor"
+    class="cerrar-visor"
+    type="button"
+    aria-label="Cerrar fotografía"
+  >×</button>
+
+  <img
+    id="imagenAmpliada"
+    alt="Fotografía ampliada del producto"
+  >
+</div>
   
 </body>
 </html>
