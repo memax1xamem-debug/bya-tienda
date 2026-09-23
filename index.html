@@ -830,6 +830,33 @@ visor.classList.add("abierto");
   
   galeria.appendChild(imagen);
 
+// MINIATURAS DE LAS FOTOGRAFÍAS
+
+if (fotos.length > 1) {
+
+  const miniaturas = document.createElement("div");
+  miniaturas.className = "miniaturas";
+
+  fotos.forEach((foto, indice) => {
+
+    const miniatura = document.createElement("img");
+    miniatura.src = foto;
+    miniatura.alt = "Foto " + (indice + 1);
+    miniatura.loading = "lazy";
+
+    miniatura.addEventListener("click", () => {
+      fotoActual = indice;
+      imagen.src = fotos[fotoActual];
+    });
+
+    miniaturas.appendChild(miniatura);
+
+  });
+
+  galeria.insertAdjacentElement("afterend", miniaturas);
+
+}
+  
   // Mostrar botones si hay más de una fotografía
 
   if (fotos.length > 1) {
@@ -877,6 +904,7 @@ visor.classList.add("abierto");
   }
 
   tarjeta.appendChild(galeria);
+tarjeta.appendChild(miniaturas);
 
 }
     const info = document.createElement("div");
