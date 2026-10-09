@@ -260,7 +260,34 @@ select:focus {
   }
 
 }
-  
+
+
+/* OPCIÓN DE OFERTAS */
+
+.opcion-oferta {
+  background: #fff4e9;
+  border: 1px solid #f26522;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.opcion-oferta label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.opcion-oferta input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: #f26522;
+}
+
+    
   </style>
 </head>
 
@@ -388,6 +415,21 @@ select:focus {
 
 </select>
 
+
+<!-- PRODUCTO EN OFERTA -->
+
+<div class="opcion-oferta">
+
+  <label for="enOferta">
+    <input
+      type="checkbox"
+      id="enOferta"
+    >
+    🔥 Mostrar este producto en Ofertas
+  </label>
+
+</div>
+        
         <label for="descripcion">
           Descripción
         </label>
@@ -703,6 +745,9 @@ document.querySelector(
   document.getElementById("stock").value =
     producto.stock ?? 0;
 
+document.getElementById("enOferta").checked =
+  producto.enOferta === true;
+  
   document.getElementById("foto").value =
     producto.foto || "";
 
@@ -1004,6 +1049,9 @@ formProducto.addEventListener("submit", async (event) => {
   const stock =
     Number(document.getElementById("stock").value);
 
+const enOferta =
+  document.getElementById("enOferta").checked;
+  
   const foto =
   document.getElementById("foto").value.trim();
 
@@ -1068,12 +1116,14 @@ for (const archivo of fotosSeleccionadas) {
 // Usar la primera fotografía como imagen principal
 const fotoPrincipal = fotos[0] || "";
     
- const datosProducto = {
+ 
+const datosProducto = {
   nombre: nombre,
   categoria: categoria,
   descripcion: descripcion,
   precio: precio,
   stock: stock,
+  enOferta: enOferta,
   foto: fotoPrincipal,
   fotos: fotos
 };
