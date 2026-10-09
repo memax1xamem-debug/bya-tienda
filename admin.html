@@ -1162,17 +1162,19 @@ for (const archivo of fotosSeleccionadas) {
 const fotoPrincipal = fotos[0] || "";
     
  
+
 const datosProducto = {
   nombre: nombre,
   categoria: categoria,
   descripcion: descripcion,
   precio: precio,
+  precioOferta: precioOferta,
   stock: stock,
   enOferta: enOferta,
   foto: fotoPrincipal,
-  fotos: fotos,
-  precio: precio,
+  fotos: fotos
 };
+
 
 if (productoEnEdicion) {
 
