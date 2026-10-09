@@ -1086,13 +1086,31 @@ function agregarAlCarrito(id, producto) {
 
   } else {
 
-   carrito.push({
+   
+const precioNormal = Number(producto.precio);
+
+const precioOferta = Number(producto.precioOferta);
+
+const tieneDescuento =
+  producto.enOferta === true &&
+  producto.precioOferta != null &&
+  producto.precioOferta !== "" &&
+  Number.isFinite(precioOferta) &&
+  precioOferta > 0 &&
+  precioOferta < precioNormal;
+
+const precioFinal = tieneDescuento
+  ? precioOferta
+  : precioNormal;
+
+carrito.push({
   id: id,
   nombre: producto.nombre,
-  precio: Number(producto.precio),
+  precio: precioFinal,
   cantidad: 1,
   stock: Number(producto.stock || 0)
 });
+
     
   }
 
