@@ -634,6 +634,39 @@ footer {
   outline: none;
   border-color: #f26522;
 }
+
+
+/* MÉTODO DE ENTREGA */
+
+.metodo-entrega {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: white;
+  border: 1px solid #dce8df;
+  border-radius: 10px;
+}
+
+.metodo-entrega h3 {
+  color: #075432;
+  margin-bottom: 15px;
+}
+
+.metodo-entrega label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  color: #173d2b;
+}
+
+.metodo-entrega input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #075432;
+  flex-shrink: 0;
+}
+
     
   </style>
 </head>
@@ -797,6 +830,35 @@ footer {
 
 <!-- DATOS PARA LA ENTREGA -->
 
+
+<!-- MÉTODO DE ENTREGA -->
+
+<div class="metodo-entrega">
+
+  <h3>📦 ¿Cómo querés recibir tu pedido?</h3>
+
+  <label>
+    <input
+      type="radio"
+      name="metodoEntrega"
+      value="domicilio"
+      checked
+    >
+    🚚 Entrega a domicilio
+  </label>
+
+  <label>
+    <input
+      type="radio"
+      name="metodoEntrega"
+      value="retiro"
+    >
+    🏪 Retirar mi pedido
+  </label>
+
+</div>
+
+  
 <div class="datos-entrega">
 
   <h3>🚚 Datos para la entrega</h3>
@@ -808,7 +870,8 @@ footer {
     autocomplete="name"
     required
   >
-
+<div id="camposDomicilio">
+  
   <input
     type="text"
     id="direccionCliente"
@@ -822,7 +885,9 @@ footer {
     id="referenciaCliente"
     placeholder="Entre calles o referencia (opcional)"
   >
-
+  
+</div>
+  
   <input
     type="tel"
     id="telefonoCliente"
@@ -865,6 +930,39 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
 
+
+// MOSTRAR U OCULTAR DIRECCIÓN SEGÚN ENTREGA
+
+const opcionesEntrega =
+  document.querySelectorAll('input[name="metodoEntrega"]');
+
+const camposDomicilio =
+  document.getElementById("camposDomicilio");
+
+opcionesEntrega.forEach((opcion) => {
+
+  opcion.addEventListener("change", () => {
+
+    const metodoSeleccionado =
+      document.querySelector(
+        'input[name="metodoEntrega"]:checked'
+      ).value;
+
+    if (metodoSeleccionado === "retiro") {
+
+      camposDomicilio.style.display = "none";
+
+    } else {
+
+      camposDomicilio.style.display = "block";
+
+    }
+
+  });
+
+});
+
+  
 // Configuración de Firebase ByA
 
 const firebaseConfig = {
@@ -1043,15 +1141,26 @@ document.getElementById("cantidadCarrito").textContent =
 
   // Comprobar si el carrito está vacío
 
-  if (carrito.length === 0) {
+ 
+if (carrito.length === 0) {
 
-    listaCarrito.textContent =
-      "Tu carrito está vacío.";
+  listaCarrito.textContent =
+    "Tu carrito está vacío.";
 
-    totalCarrito.textContent = "$0";
+  totalCarrito.textContent = "$0";
 
-    return;
-  }
+  const informacionEnvio =
+    document.getElementById("informacionEnvio");
+
+  informacionEnvio.textContent =
+    "🚚 Envío gratis desde $20.000. " +
+    "Para compras menores, el costo se coordina por WhatsApp.";
+
+  informacionEnvio.style.background = "#e8f5ec";
+  informacionEnvio.style.color = "#075432";
+
+  return;
+}
 
   // Mostrar cada producto agregado
 
@@ -1619,6 +1728,13 @@ document.getElementById("finalizarCompra")
 
 // OBTENER LOS DATOS DEL CLIENTE
 
+
+const metodoEntrega =
+  document.querySelector(
+    'input[name="metodoEntrega"]:checked'
+  ).value;
+
+    
 const nombreCliente =
   document.getElementById("nombreCliente").value.trim();
 
@@ -1633,12 +1749,17 @@ const telefonoCliente =
 
 // VALIDAR DATOS OBLIGATORIOS
 
+
+if (!nombreCliente || !telefonoCliente) {
+  alert("Completá tu nombre y teléfono.");
+  return;
+}
+
 if (
-  !nombreCliente ||
-  !direccionCliente ||
-  !telefonoCliente
+  metodoEntrega === "domicilio" &&
+  !direccionCliente
 ) {
-  alert("Completá tu nombre, dirección y teléfono para realizar el pedido.");
+  alert("Completá la dirección de entrega.");
   return;
 }
 
@@ -1661,17 +1782,29 @@ if (
   
 mensaje += "\n\n🚚 DATOS DE ENTREGA:\n";
 
+
+mensaje += "\n\n📦 DATOS DEL PEDIDO:\n";
+
 mensaje += "Nombre: " + nombreCliente + "\n";
-mensaje += "Dirección: " + direccionCliente + "\n";
-
-if (referenciaCliente) {
-  mensaje += "Referencia: " + referenciaCliente + "\n";
-}
-
 mensaje += "Teléfono: " + telefonoCliente + "\n";
 
-mensaje += "\nQuisiera coordinar el pago y la entrega.";
+if (metodoEntrega === "retiro") {
 
+  mensaje += "Modalidad: RETIRO DEL PEDIDO\n";
+  mensaje += "Envío: No corresponde\n";
+
+} else {
+
+  mensaje += "Modalidad: ENTREGA A DOMICILIO\n";
+  mensaje += "Dirección: " + direccionCliente + "\n";
+
+  if (referenciaCliente) {
+    mensaje += "Referencia: " + referenciaCliente + "\n";
+  }
+
+}
+
+mensaje += "\nQuisiera coordinar el pago y la entrega.";
 
     let total = 0;
 
@@ -1695,6 +1828,22 @@ mensaje += "\nQuisiera coordinar el pago y la entrega.";
       "💰 TOTAL: $" +
       total.toLocaleString("es-AR");
 
+
+/* CONDICIONES DE ENVÍO DEL PEDIDO */
+
+if (total >= 20000) {
+
+  mensaje += "\n🚚 ENVÍO: GRATIS";
+
+} else {
+
+  mensaje +=
+    "\n🚚 ENVÍO: Costo a coordinar por WhatsApp";
+
+}
+
+
+    
     mensaje += "\n\nQuisiera coordinar el pago y la entrega.";
 
     // Abrir WhatsApp con el pedido
