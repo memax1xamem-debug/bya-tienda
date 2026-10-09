@@ -601,6 +601,39 @@ footer {
   z-index: 5;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
+
+
+/* DATOS PARA ENTREGA */
+
+.datos-entrega {
+  margin-top: 25px;
+  padding: 20px;
+  background: #f2f8f4;
+  border-radius: 12px;
+  border: 1px solid #dce8df;
+}
+
+.datos-entrega h3 {
+  color: #075432;
+  margin-bottom: 15px;
+}
+
+.datos-entrega input {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 12px;
+  border: 1px solid #cbded0;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  color: #173d2b;
+}
+
+.datos-entrega input:focus {
+  outline: none;
+  border-color: #f26522;
+}
     
   </style>
 </head>
@@ -741,6 +774,45 @@ footer {
     Total: <span id="totalCarrito">$0</span>
   </h3>
 
+
+<!-- DATOS PARA LA ENTREGA -->
+
+<div class="datos-entrega">
+
+  <h3>🚚 Datos para la entrega</h3>
+
+  <input
+    type="text"
+    id="nombreCliente"
+    placeholder="Nombre y apellido"
+    autocomplete="name"
+    required
+  >
+
+  <input
+    type="text"
+    id="direccionCliente"
+    placeholder="Calle y número"
+    autocomplete="street-address"
+    required
+  >
+
+  <input
+    type="text"
+    id="referenciaCliente"
+    placeholder="Entre calles o referencia (opcional)"
+  >
+
+  <input
+    type="tel"
+    id="telefonoCliente"
+    placeholder="Teléfono de contacto"
+    autocomplete="tel"
+    required
+  >
+
+</div>
+  
 <!-- BOTÓN FINALIZAR COMPRA -->
 
 <button
