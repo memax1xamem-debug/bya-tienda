@@ -452,6 +452,26 @@ select:focus {
           required
         >
 
+
+<!-- PRECIO PROMOCIONAL -->
+
+<label for="precioOferta">
+  🔥 Precio de oferta (opcional)
+</label>
+
+<input
+  type="number"
+  id="precioOferta"
+  min="0"
+  step="0.01"
+  placeholder="Ejemplo: 3800"
+>
+
+<p class="aviso">
+  Dejá este campo vacío si el producto
+  no tiene descuento.
+</p>
+        
         <label for="stock">
           Cantidad disponible
         </label>
@@ -742,6 +762,9 @@ document.querySelector(
   document.getElementById("precio").value =
     producto.precio ?? "";
 
+document.getElementById("precioOferta").value =
+  producto.precioOferta ?? "";
+  
   document.getElementById("stock").value =
     producto.stock ?? 0;
 
@@ -1046,6 +1069,13 @@ formProducto.addEventListener("submit", async (event) => {
   const precio =
     Number(document.getElementById("precio").value);
 
+const campoPrecioOferta =
+  document.getElementById("precioOferta").value.trim();
+
+const precioOferta = campoPrecioOferta === ""
+  ? null
+  : Number(campoPrecioOferta);
+  
   const stock =
     Number(document.getElementById("stock").value);
 
@@ -1090,6 +1120,21 @@ const fotosSeleccionadas = Array.from(
     return;
   }
 
+if (
+  precioOferta !== null &&
+  (
+    !Number.isFinite(precioOferta) ||
+    precioOferta <= 0 ||
+    precioOferta >= precio
+  )
+) {
+  alert(
+    "El precio de oferta debe ser mayor a cero " +
+    "y menor que el precio normal."
+  );
+  return;
+}
+  
   const boton = formProducto.querySelector(
     'button[type="submit"]'
   );
@@ -1126,6 +1171,7 @@ const datosProducto = {
   enOferta: enOferta,
   foto: fotoPrincipal,
   fotos: fotos
+  precio: precio,
 };
 
 if (productoEnEdicion) {
