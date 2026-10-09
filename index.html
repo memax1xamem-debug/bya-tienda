@@ -582,6 +582,25 @@ footer {
   }
 }
 
+/* ETIQUETA DE OFERTAS */
+
+.producto {
+  position: relative;
+}
+
+.etiqueta-oferta {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #f26522;
+  color: white;
+  padding: 7px 12px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
     
   </style>
 </head>
@@ -1152,7 +1171,23 @@ if (
 }    
     const tarjeta = document.createElement("div");
     tarjeta.className = "producto";
-    
+
+
+/* ETIQUETA DE PRODUCTO EN OFERTA */
+
+if (producto.enOferta === true) {
+
+  const etiquetaOferta =
+    document.createElement("span");
+
+  etiquetaOferta.className = "etiqueta-oferta";
+
+  etiquetaOferta.textContent = "🔥 OFERTA";
+
+  tarjeta.appendChild(etiquetaOferta);
+
+}
+  
 // GALERÍA DE FOTOGRAFÍAS DEL PRODUCTO
 
 const fotos = Array.isArray(producto.fotos)
