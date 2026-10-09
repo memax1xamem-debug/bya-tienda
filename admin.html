@@ -146,6 +146,121 @@
         padding: 15px;
       }
     }
+
+  
+/* =====================================
+   BYA ALMACÉN VIRTUAL - ADMINISTRADOR
+===================================== */
+
+body {
+  background: #f5f7f3;
+  color: #173d2b;
+}
+
+header {
+  background: #075432;
+  border-bottom: 4px solid #f26522;
+  padding: 20px;
+}
+
+.logo {
+  color: white;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+h1, h2 {
+  color: #075432;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #dce8df;
+  border-radius: 15px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+}
+
+label {
+  color: #173d2b;
+  font-weight: bold;
+}
+
+input, textarea, select {
+  background: #ffffff;
+  color: #173d2b;
+  border: 1px solid #cbdcd0;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #f26522;
+}
+
+.boton {
+  background: #087443;
+  color: white;
+  border-radius: 9px;
+}
+
+.boton:hover {
+  background: #075432;
+}
+
+.producto {
+  background: #ffffff;
+  border: 1px solid #dce8df;
+  color: #173d2b;
+}
+
+.producto img {
+  object-fit: contain;
+  background: white;
+}
+
+.precio {
+  color: #087443;
+}
+
+.aviso {
+  color: #66776c;
+}
+
+/* Botón cerrar sesión */
+
+#cerrarSesion {
+  background: #f26522;
+  color: white;
+}
+
+#cerrarSesion:hover {
+  background: #d94f10;
+}
+
+/* Mensajes de error */
+
+#errorLogin {
+  color: #c62828 !important;
+}
+
+/* Adaptación para celulares */
+
+@media (max-width: 600px) {
+
+  .contenedor {
+    padding: 15px 10px;
+  }
+
+  .panel {
+    padding: 15px;
+  }
+
+  .productos {
+    grid-template-columns: 1fr;
+  }
+
+}
+  
   </style>
 </head>
 
