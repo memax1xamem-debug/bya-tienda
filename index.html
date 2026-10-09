@@ -491,6 +491,98 @@ footer {
 }
 
     
+/* TARJETAS DE PRODUCTOS DEL ALMACÉN */
+
+.productos {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(170px, 1fr)
+  );
+  gap: 18px;
+}
+
+.producto {
+  background: white;
+  border: 1px solid #e3e9e4;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s;
+}
+
+.producto:hover {
+  transform: translateY(-3px);
+}
+
+.galeria {
+  height: 190px;
+  background: white;
+}
+
+.galeria img {
+  object-fit: contain;
+  padding: 10px;
+}
+
+.producto-info {
+  padding: 15px;
+}
+
+.producto h3 {
+  color: #173d2b;
+  font-size: 16px;
+  min-height: 38px;
+}
+
+.producto-info p {
+  line-height: 1.5;
+}
+
+.precio {
+  color: #087443;
+  font-size: 24px;
+  font-weight: 800;
+  margin: 12px 0;
+}
+
+.producto .boton {
+  background: #087443;
+  color: white;
+  border-radius: 9px;
+  padding: 13px;
+}
+
+.producto .boton:hover {
+  background: #075432;
+}
+
+.producto .boton:disabled {
+  background: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .productos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .producto-info {
+    padding: 10px;
+  }
+
+  .galeria {
+    height: 145px;
+  }
+
+  .precio {
+    font-size: 20px;
+  }
+}
+
+    
   </style>
 </head>
 
