@@ -774,6 +774,26 @@ footer {
     Total: <span id="totalCarrito">$0</span>
   </h3>
 
+  
+<!-- INFORMACIÓN DEL ENVÍO -->
+
+<div id="informacionEnvio"
+     style="
+       margin-top:15px;
+       padding:15px;
+       background:#e8f5ec;
+       border:1px solid #c9e4d2;
+       border-radius:10px;
+       color:#075432;
+       font-size:15px;
+     ">
+
+  🚚 Envío gratis desde $20.000.
+  Para compras menores, el costo se coordina
+  por WhatsApp.
+
+</div>
+
 
 <!-- DATOS PARA LA ENTREGA -->
 
@@ -1133,6 +1153,36 @@ listaCarrito.appendChild(item);
       currency: "ARS"
     });
 
+
+/* CALCULAR CONDICIONES DE ENVÍO */
+
+const informacionEnvio =
+  document.getElementById("informacionEnvio");
+
+if (total >= 20000) {
+
+  informacionEnvio.textContent =
+    "🚚 ¡Felicitaciones! Tu compra tiene ENVÍO GRATIS.";
+
+  informacionEnvio.style.background = "#d9f5e3";
+  informacionEnvio.style.color = "#075432";
+
+} else {
+
+  const faltante = 20000 - total;
+
+  informacionEnvio.textContent =
+    "🚚 El costo del envío se coordina por WhatsApp. " +
+    "¡Agregá $" +
+    faltante.toLocaleString("es-AR") +
+    " más para obtener ENVÍO GRATIS!";
+
+  informacionEnvio.style.background = "#fff0e5";
+  informacionEnvio.style.color = "#9a450e";
+
+}
+
+  
 }
   
 // Agregar productos al carrito
