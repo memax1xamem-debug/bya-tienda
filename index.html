@@ -1349,15 +1349,46 @@ botonSiguiente.addEventListener("click", () => {
     const descripcion = document.createElement("p");
     descripcion.textContent = producto.descripcion || "";
 
-    const precio = document.createElement("p");
-    precio.className = "precio";
+   
+const precio = document.createElement("div");
+precio.className = "precio";
 
-    precio.textContent = Number(
-      producto.precio || 0
-    ).toLocaleString("es-AR", {
-      style: "currency",
-      currency: "ARS"
-    });
+const precioNormal = Number(producto.precio || 0);
+const precioOferta = Number(producto.precioOferta);
+
+const tieneDescuento =
+  producto.enOferta === true &&
+  producto.precioOferta != null &&
+  producto.precioOferta !== "" &&
+  precioOferta > 0 &&
+  precioOferta < precioNormal;
+
+const formatearPrecio = (valor) =>
+  valor.toLocaleString("es-AR", {
+    style: "currency",
+    currency: "ARS"
+  });
+
+if (tieneDescuento) {
+
+  const anterior = document.createElement("div");
+  anterior.style.textDecoration = "line-through";
+  anterior.style.color = "#888";
+  anterior.style.fontSize = "15px";
+  anterior.style.fontWeight = "normal";
+  anterior.textContent = formatearPrecio(precioNormal);
+
+  const promocional = document.createElement("div");
+  promocional.style.color = "#f26522";
+  promocional.textContent = formatearPrecio(precioOferta);
+
+  precio.append(anterior, promocional);
+
+} else {
+
+  precio.textContent = formatearPrecio(precioNormal);
+
+}
 
     const stock = document.createElement("p");
 
