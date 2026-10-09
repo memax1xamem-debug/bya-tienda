@@ -1118,13 +1118,23 @@ productosOrdenados.forEach((productoSnapshot) => {
 
     const producto = productoSnapshot.val();
 
-// Filtrar productos por categoría
 
-if (
+// FILTRAR PRODUCTOS POR CATEGORÍA Y OFERTAS
+
+if (categoriaSeleccionada === "Ofertas") {
+
+  // Mostrar solamente productos marcados como oferta
+  if (producto.enOferta !== true) {
+    return;
+  }
+
+} else if (
   categoriaSeleccionada !== "todos" &&
   producto.categoria !== categoriaSeleccionada
 ) {
+
   return;
+
 }
 
 // Filtrar productos por nombre y descripción
