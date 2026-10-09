@@ -430,6 +430,67 @@ footer {
 }
 
     
+/* BANNER DEL ALMACÉN */
+
+.banner {
+  padding: 45px 20px;
+  text-align: center;
+}
+
+.banner h1 {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.banner p {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.beneficios-banner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin: 30px 0;
+}
+
+.beneficios-banner div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 16px;
+}
+
+.beneficios-banner span {
+  font-size: 13px;
+}
+
+.boton-ver-productos {
+  display: inline-block;
+  background: #f26522;
+  color: white;
+  padding: 14px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.boton-ver-productos:hover {
+  background: #d94f10;
+}
+
+@media (max-width: 600px) {
+  .banner h1 {
+    font-size: 27px;
+  }
+
+  .beneficios-banner {
+    gap: 18px;
+  }
+}
+
+    
   </style>
 </head>
 
@@ -461,38 +522,86 @@ footer {
   >
 </div>
   
-  <section class="banner">
-    <h1>Bienvenidos a ByA</h1>
-    <p>
-      Descubrí nuestros productos.
-      Comprá de forma fácil, segura y discreta.
-    </p>
-  </section>
+  
+<section class="banner">
+
+  <h1>ByA Almacén Virtual</h1>
+
+  <h2 style="color:white; margin-bottom:15px;">
+    Tu almacén, sin salir de casa
+  </h2>
+
+  <p>
+    Alimentos, bebidas, limpieza y mucho más.
+    Hacé tu pedido online y recibilo en tu casa.
+  </p>
+
+  <div class="beneficios-banner">
+
+    <div>
+      🚚 <strong>Envío gratis</strong>
+      <span>Desde $20.000</span>
+    </div>
+
+    <div>
+      📍 <strong>Entregas en</strong>
+      <span>San Francisco Solano</span>
+    </div>
+
+    <div>
+      🛒 <strong>Comprá online</strong>
+      <span>Fácil y rápido</span>
+    </div>
+
+  </div>
+
+  <a href="#listaProductos" class="boton-ver-productos">
+    Ver productos →
+  </a>
+
+</section>
 
   <main class="contenedor">
 
     <h2>Nuestras categorías</h2>
 
-    <div class="categorias">
+   
+<div class="categorias">
 
-  <div class="categoria" data-categoria="todos">
-    Todos los productos
+  <div class="categoria activa" data-categoria="todos">
+    🛒 Todos los productos
   </div>
 
-  <div class="categoria" data-categoria="Bienestar íntimo">
-    Bienestar íntimo
+  <div class="categoria" data-categoria="Almacén">
+    🥫 Almacén
   </div>
 
-  <div class="categoria" data-categoria="Lubricantes">
-    Lubricantes
+  <div class="categoria" data-categoria="Bebidas">
+    🥤 Bebidas
   </div>
 
-  <div class="categoria" data-categoria="Accesorios">
-    Accesorios
+  <div class="categoria" data-categoria="Lácteos">
+    🥛 Lácteos
   </div>
 
-  <div class="categoria" data-categoria="Kits y regalos">
-    Kits y regalos
+  <div class="categoria" data-categoria="Fiambres">
+    🧀 Fiambres
+  </div>
+
+  <div class="categoria" data-categoria="Frutas y Verduras">
+    🍎 Frutas y Verduras
+  </div>
+
+  <div class="categoria" data-categoria="Limpieza">
+    🧹 Limpieza
+  </div>
+
+  <div class="categoria" data-categoria="Perfumería">
+    🧴 Perfumería
+  </div>
+
+  <div class="categoria" data-categoria="Ofertas">
+    🔥 Ofertas
   </div>
 
 </div>
