@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ByA - Tienda Online</title>
+  <title>ByA - Almacén Virtual</title>
 
   <style>
     * {
@@ -313,20 +313,139 @@
   border-radius: 20px;
   font-size: 14px;
 }
+
+    
+/* ===================================
+   BYA ALMACÉN VIRTUAL - NUEVO DISEÑO
+=================================== */
+
+body {
+  background: #f8f8f3;
+  color: #173d2b;
+}
+
+header {
+  background: #ffffff;
+  padding: 25px 15px;
+  text-align: center;
+  border-bottom: 4px solid #f26522;
+}
+
+.logo {
+  font-size: 54px;
+  font-weight: 900;
+  color: #075432;
+  letter-spacing: 2px;
+}
+
+.subtitulo {
+  color: #f26522;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.lema {
+  color: #456052;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.buscador {
+  background: #ffffff;
+  padding: 20px;
+}
+
+.buscador input {
+  background: #ffffff;
+  color: #173d2b;
+  border: 2px solid #dce8df;
+  border-radius: 30px;
+}
+
+.buscador input:focus {
+  border-color: #f26522;
+}
+
+.banner {
+  background: linear-gradient(
+    120deg,
+    #075432,
+    #198754
+  );
+  color: white;
+  border-radius: 15px;
+  margin: 15px;
+}
+
+h2 {
+  color: #075432;
+}
+
+.categoria {
+  background: #ffffff;
+  color: #173d2b;
+  border: 1px solid #dce8df;
+}
+
+.categoria:hover {
+  background: #e4f3e9;
+  border-color: #075432;
+}
+
+.categoria.activa {
+  background: #075432;
+  color: white;
+  border-color: #075432;
+}
+
+.producto {
+  background: #ffffff;
+  color: #173d2b;
+  border: 1px solid #e0e8e2;
+}
+
+.precio {
+  color: #075432;
+}
+
+.boton {
+  background: #075432;
+  color: white;
+}
+
+.boton:hover {
+  background: #087a47;
+}
+
+#seccionCarrito {
+  background: #ffffff !important;
+  color: #173d2b;
+  border: 1px solid #dce8df !important;
+}
+
+footer {
+  background: #075432;
+  color: white;
+}
+
     
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">ByA</div>
-    <div class="subtitulo">
-      Tu tienda de bienestar íntimo
-    </div>
-  </header>
+ <header>
+  <div class="logo">ByA</div>
+  <div class="subtitulo">
+    ALMACÉN VIRTUAL
+  </div>
+  <p class="lema">
+    Tu almacén, sin salir de casa
+  </p>
+</header>
 
-<div style="text-align:center; padding:15px; background:#000;">
+  <div style="text-align:center; padding:15px; background:#000;">
   <a href="#seccionCarrito"
      style="display:inline-block; padding:12px 25px; background:#ff4fa3; color:#000; text-decoration:none; border-radius:8px; font-weight:bold;">
     🛒 Ver carrito (<span id="cantidadCarrito">0</span>)
