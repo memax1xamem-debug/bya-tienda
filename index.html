@@ -1566,6 +1566,33 @@ onValue(productosRef, (snapshot) => {
 document.getElementById("finalizarCompra")
   .addEventListener("click", () => {
 
+
+// OBTENER LOS DATOS DEL CLIENTE
+
+const nombreCliente =
+  document.getElementById("nombreCliente").value.trim();
+
+const direccionCliente =
+  document.getElementById("direccionCliente").value.trim();
+
+const referenciaCliente =
+  document.getElementById("referenciaCliente").value.trim();
+
+const telefonoCliente =
+  document.getElementById("telefonoCliente").value.trim();
+
+// VALIDAR DATOS OBLIGATORIOS
+
+if (
+  !nombreCliente ||
+  !direccionCliente ||
+  !telefonoCliente
+) {
+  alert("Completá tu nombre, dirección y teléfono para realizar el pedido.");
+  return;
+}
+
+    
     // Comprobar que el carrito tenga productos
 
     if (carrito.length === 0) {
@@ -1581,7 +1608,20 @@ document.getElementById("finalizarCompra")
 
     let mensaje = "Hola, quiero realizar un pedido en ByA.\n\n";
 
-    mensaje += "🛒 MI PEDIDO:\n\n";
+  
+mensaje += "\n\n🚚 DATOS DE ENTREGA:\n";
+
+mensaje += "Nombre: " + nombreCliente + "\n";
+mensaje += "Dirección: " + direccionCliente + "\n";
+
+if (referenciaCliente) {
+  mensaje += "Referencia: " + referenciaCliente + "\n";
+}
+
+mensaje += "Teléfono: " + telefonoCliente + "\n";
+
+mensaje += "\nQuisiera coordinar el pago y la entrega.";
+
 
     let total = 0;
 
